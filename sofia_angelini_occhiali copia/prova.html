@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="it" class="prova-aeris">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prova AERIS in 3D</title>
+    <link rel="stylesheet" href="css/configuratore.css">
+    <link rel="stylesheet" href="css/occhiale.css">
+    <script defer src="aeris-palette.js"></script>
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+                "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+            }
+        }
+    </script>
+    <script type="module">
+        import('./prova.js').catch((errore) => {
+            document.getElementById('stato-prova').textContent = 'Impossibile caricare la prova 3D. Controlla la connessione e ricarica la pagina.';
+            console.error(errore);
+        });
+    </script>
+</head>
+<body>
+    <header class="testata-prova-aeris">
+        <a href="index.html" aria-label="AERIS, torna alla homepage">AERIS</a>
+        <span>Prova virtuale</span>
+    </header>
+    <main class="dettaglio-occhiale dettaglio-con-pannello layout-prova">
+        <div class="visore visore-prova" id="visore-prova">
+            <img class="anteprima-prova-aeris" data-anteprima-finitura src="img/aeris-aperto.png" width="900" height="590" alt="Occhiali AERIS assemblati">
+            <video id="video-prova" playsinline muted hidden aria-hidden="true"></video>
+            <img class="anteprima-acquisizione" id="anteprima-foto" alt="Foto della prova degli occhiali" hidden>
+            <video class="anteprima-acquisizione" id="anteprima-video" controls playsinline hidden aria-label="Video della prova degli occhiali"></video>
+        </div>
+        <div class="pannello-dettaglio pannello-prova">
+            <h1>Prova AERIS.</h1>
+            <p class="descrizione-dettaglio" id="descrizione-occhiale" hidden></p>
+            <p class="istruzioni-occhiale" id="stato-prova" role="status">Caricamento del modello…</p>
+            <section class="finiture-prova-aeris" aria-label="Finiture di AERIS">
+                <p class="nome-finitura" data-nome-finitura aria-live="polite">Nero fumé</p>
+                <div class="palette-aeris" data-palette-aeris role="group" aria-label="Scegli la finitura"></div>
+            </section>
+            <div class="azioni-occhiale">
+                <button class="comando-prova" type="button" id="fotocamera" disabled>
+                    <span class="comando-prova-cerchio" aria-hidden="true"><span class="icona-videocamera"></span></span>
+                    <span class="comando-prova-etichetta">Attiva fotocamera</span>
+                </button>
+                <a class="comando-prova" id="torna-modello" data-torna-aeris href="index.html#colori">
+                    <span class="comando-prova-cerchio" aria-hidden="true"><span class="icona-modello"></span></span>
+                    <span class="comando-prova-etichetta">Torna al modello</span>
+                </a>
+            </div>
+            <div class="azioni-occhiale" id="azioni-acquisizione" hidden>
+                <button class="comando-prova" type="button" id="scatta-foto">
+                    <span class="comando-prova-cerchio" aria-hidden="true"><span class="icona-foto"></span></span>
+                    <span class="comando-prova-etichetta">Scatta foto</span>
+                </button>
+                <button class="comando-prova" type="button" id="registra-video">
+                    <span class="comando-prova-cerchio" aria-hidden="true"><span class="icona-registra"></span></span>
+                    <span class="comando-prova-etichetta">Registra video</span>
+                </button>
+            </div>
+            <p class="istruzioni-occhiale" id="stato-acquisizione" role="status" hidden></p>
+            <div class="risultato-acquisizione" id="risultato-acquisizione" hidden>
+                <div class="azioni-occhiale">
+                    <a class="comando-prova" id="salva-acquisizione" download>
+                        <span class="comando-prova-cerchio" aria-hidden="true"><span class="icona-salva"></span></span>
+                        <span class="comando-prova-etichetta">Salva</span>
+                    </a>
+                    <button class="comando-prova" id="condividi-foto" type="button" hidden>
+                        <span class="comando-prova-cerchio" aria-hidden="true"><span class="icona-condividi"></span></span>
+                        <span class="comando-prova-etichetta">Condividi</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

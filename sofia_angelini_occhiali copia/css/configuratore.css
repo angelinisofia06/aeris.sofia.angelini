@@ -1,0 +1,671 @@
+/* configuratore.css – la sezione "In mostra" con il visualizzatore 3D
+   (si aggiunge a stile_esercizio4.css senza modificarlo) */
+
+.sezione-configuratore {
+    padding-top: 48px;
+}
+
+/* ===== visore 3D (colonna sinistra) ===== */
+.visore {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    aspect-ratio: 1.15 / 1;
+    min-height: 320px;
+    overflow: hidden;
+    border-radius: 6px;
+    background: #fff;
+    box-shadow: inset 0 0 0 1px #e3e6ea;
+    transition: background-color 250ms ease;
+}
+
+.visore.ambiente-scuro {
+    background: #252833;
+}
+
+.visore-segnaposto {
+    margin: 0;
+    color: #92908c;
+    font-size: 16px;
+    text-align: center;
+}
+
+/* il canvas creato da Three.js riempie il visore (ci servirà dall'es. 2) */
+.visore canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+/* PASSO 4: la scritta al centro del visore */
+
+
+/* ===== pannello opzioni (colonna destra) ===== */
+.pannello {
+    padding: 8px 0 32px 0;
+}
+
+.sovratitolo {
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 13px;
+    color: rgba(0, 0, 0, 0.5);
+    margin: 0 0 4px 0;
+}
+
+.descrizione {
+    color: rgba(0, 0, 0, 0.7);
+}
+
+.opzione {
+    border-top: solid 1px #e5e0d6;
+    padding: 16px 0;
+}
+
+.opzione-titolo {
+    font-size: 15px;
+    font-weight: bold;
+    margin: 0 0 10px 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* I campioni colore di ogni componente */
+.campioni {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.campione {
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.campione.selected {
+    outline: 2px solid #222222;
+    outline-offset: 3px;
+}
+
+.btn-interruttore {
+    display: block;
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #25334a;
+    border-radius: 4px;
+    background: #25334a;
+    color: #ffffff;
+    font: inherit;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn-interruttore[aria-pressed="true"] {
+    border-color: #782f40;
+    background: #782f40;
+}
+
+.btn-interruttore:focus-visible {
+    outline: 2px solid #222222;
+    outline-offset: 3px;
+}
+
+.gruppo-composizioni {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.btn-composizione {
+    padding: 8px 11px;
+    border: 1px solid #d6d0c5;
+    border-radius: 4px;
+    background: #ffffff;
+    color: #222222;
+    font: inherit;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.btn-composizione.selected {
+    border-color: #222222;
+    background: #222222;
+    color: #ffffff;
+}
+
+.btn-composizione:focus-visible {
+    outline: 2px solid #222222;
+    outline-offset: 3px;
+}
+
+.campione:focus-visible,
+.campione:hover {
+    outline: 2px solid #222222;
+    outline-offset: 3px;
+}
+
+
+/* ===== nota e bottone ===== */
+.nota {
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.55);
+    border-top: solid 1px #e5e0d6;
+    padding-top: 16px;
+    margin: 0;
+}
+
+.btn-principale {
+    display: block;
+    width: 100%;
+    background: #e06a35;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    padding: 14px;
+    font: inherit;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn-principale:hover {
+    background: #c4541f;
+}
+
+/* ===== media query del configuratore ===== */
+@media (max-width: 991px) {
+    .visore {
+        min-height: 280px;
+    }
+}
+
+.visore-libreria {
+    aspect-ratio: 4 / 3;
+    min-height: 0;
+    background: #fff;
+}
+
+.visore-libreria canvas {
+    position: absolute;
+    inset: 0;
+}
+
+.visore-libreria [hidden] {
+    display: none;
+}
+
+.scheda-occhiali h3 {
+    margin: 12px 0 0;
+    font-size: clamp(1.125rem, 2vw, 1.25rem);
+    font-weight: 400;
+    line-height: 1.25;
+}
+
+.scheda-occhiali a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.scheda-occhiali > a {
+    display: block;
+}
+
+.dettaglio-occhiale {
+    padding-top: 32px;
+    padding-bottom: 32px;
+}
+
+.dettaglio-occhiale a {
+    color: #25334a;
+}
+
+.visore-dettaglio {
+    height: clamp(260px, 65vh, 660px);
+    aspect-ratio: auto;
+}
+
+.visore-dettaglio canvas {
+    cursor: grab;
+}
+
+.visore-dettaglio canvas:active {
+    cursor: grabbing;
+}
+
+.dettaglio-occhiale h1 {
+    margin: 22px 0 16px;
+    font-weight: 500;
+}
+
+.dettaglio-con-pannello {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    align-items: start;
+    gap: 24px;
+}
+
+.pannello-dettaglio h1 {
+    margin-top: 0;
+}
+
+.descrizione-dettaglio {
+    margin: 0 0 18px;
+    line-height: 1.6;
+}
+
+.materiale-dettaglio {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 10px;
+    margin: 0 0 18px;
+}
+
+.materiale-dettaglio dt {
+    font-weight: 500;
+}
+
+.materiale-dettaglio dd {
+    margin: 0;
+    color: #465266;
+}
+
+@media (min-width: 768px) {
+    .dettaglio-con-pannello {
+        grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+        align-items: center;
+        gap: 32px;
+    }
+}
+
+.istruzioni-occhiale {
+    margin: 14px 0;
+    color: #465266;
+}
+
+.azioni-occhiale {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+    margin-top: 18px;
+}
+
+.dettaglio-occhiale [hidden] {
+    display: none;
+}
+
+.palette-occhiale {
+    margin: 15px 0 0;
+    padding: 0;
+    border: 0;
+}
+
+.palette-occhiale legend {
+    margin-bottom: 10px;
+}
+
+.campioni-occhiale {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 9px;
+}
+
+.palette-occhiale .campione {
+    width: 30px;
+    height: 30px;
+}
+
+.palette-occhiale .campione[aria-pressed="true"] {
+    outline: 2px solid #25334a;
+    outline-offset: 3px;
+}
+
+.campione-originale {
+    background: conic-gradient(#30343c, #2d6967, #b68f64, #30343c);
+}
+
+.visore-prova {
+    height: clamp(260px, 64vh, 620px);
+    min-height: 0;
+    aspect-ratio: auto;
+    background: #fff;
+}
+
+#video-prova,
+.visore-prova > canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+}
+
+#video-prova {
+    object-fit: contain;
+    transform: scaleX(-1);
+}
+
+.visore-prova > canvas {
+    pointer-events: none;
+}
+
+.anteprima-acquisizione {
+    position: absolute;
+    z-index: 1;
+    right: 12px;
+    bottom: 12px;
+    width: min(35%, 200px);
+    max-height: 42%;
+    object-fit: contain;
+    border-radius: 8px;
+    border: 2px solid #fff;
+    background: #25334a;
+    box-shadow: 0 2px 10px #25334a33;
+}
+
+.pannello-prova h1 {
+    margin-bottom: 8px;
+    font-size: clamp(1.375rem, 2.5vw, 1.75rem);
+    line-height: 1.18;
+}
+
+.pannello-prova .descrizione-dettaglio,
+.pannello-prova .materiale-dettaglio,
+.pannello-prova .istruzioni-occhiale {
+    margin: 0 0 8px;
+    line-height: 1.4;
+}
+
+.pannello-prova .istruzioni-occhiale {
+    font-size: 0.875rem;
+}
+
+.pannello-prova .palette-occhiale {
+    margin-top: 8px;
+}
+
+.pannello-prova .palette-occhiale legend {
+    margin-bottom: 4px;
+}
+
+.pannello-prova .campioni-occhiale {
+    gap: 8px;
+}
+
+.pannello-prova .campione {
+    width: 24px;
+    height: 24px;
+}
+
+.pannello-prova .azioni-occhiale {
+    margin: 10px 0 0;
+    gap: 12px;
+    align-items: flex-start;
+}
+
+.pannello-prova #stato-acquisizione {
+    margin: 6px 0 0;
+}
+
+@media (min-width: 768px) {
+    .layout-prova {
+        --altezza-prova: clamp(350px, calc(100svh - 64px), 620px);
+        grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr);
+        align-items: stretch;
+        gap: 24px;
+    }
+
+    .layout-prova .visore-prova,
+    .pannello-prova {
+        height: var(--altezza-prova);
+    }
+
+    .pannello-prova {
+        overflow-y: auto;
+        padding: 4px 6px 4px 4px;
+    }
+}
+
+.dettaglio-occhiale .comando-prova {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    padding: 0;
+    border: 0;
+    border-radius: 8px;
+    background: transparent;
+    color: #25334a;
+    font: inherit;
+    font-size: 0.875rem;
+    line-height: 1.3;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.comando-prova-cerchio {
+    display: grid;
+    place-items: center;
+    width: 48px;
+    height: 48px;
+    border: 1px solid #25334a;
+    border-radius: 50%;
+    background: #fff;
+}
+
+.comando-prova:not(:disabled):hover .comando-prova-cerchio {
+    background: #eaf0f6;
+}
+
+.comando-prova:focus-visible {
+    outline: 2px solid #25334a;
+    outline-offset: 4px;
+}
+
+.comando-prova:disabled {
+    opacity: 0.55;
+    cursor: default;
+}
+
+.icona-videocamera,
+.icona-foto,
+.icona-salva {
+    position: relative;
+    display: block;
+}
+
+.icona-videocamera {
+    width: 15px;
+    height: 12px;
+    margin-right: 5px;
+    border: 2px solid currentColor;
+    border-radius: 3px;
+}
+
+.icona-videocamera::after {
+    position: absolute;
+    top: -1px;
+    left: 100%;
+    width: 7px;
+    height: 10px;
+    background: currentColor;
+    clip-path: polygon(0 34%, 100% 0, 100% 100%, 0 66%);
+    content: "";
+}
+
+#fotocamera[data-attivo] .icona-videocamera::before {
+    position: absolute;
+    z-index: 1;
+    top: 3px;
+    left: -6px;
+    width: 24px;
+    height: 2px;
+    transform: rotate(-45deg);
+    background: currentColor;
+    box-shadow: 0 1px #fff;
+    content: "";
+}
+
+.icona-foto {
+    width: 21px;
+    height: 15px;
+    border: 2px solid currentColor;
+    border-radius: 3px;
+}
+
+.icona-foto::before {
+    position: absolute;
+    top: -5px;
+    left: 5px;
+    width: 7px;
+    height: 4px;
+    border-radius: 2px 2px 0 0;
+    background: currentColor;
+    content: "";
+}
+
+.icona-foto::after {
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    width: 8px;
+    height: 8px;
+    border: 1.5px solid currentColor;
+    border-radius: 50%;
+    content: "";
+}
+
+.icona-registra {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #b92e3c;
+}
+
+#registra-video[data-attivo] .icona-registra {
+    border-radius: 3px;
+}
+
+.icona-salva {
+    width: 19px;
+    height: 7px;
+    margin-top: 11px;
+    border: 2px solid currentColor;
+    border-top: 0;
+    border-radius: 0 0 3px 3px;
+}
+
+.icona-salva::before,
+.icona-salva::after {
+    position: absolute;
+    left: 50%;
+    content: "";
+}
+
+.icona-salva::before {
+    top: -12px;
+    width: 2px;
+    height: 11px;
+    transform: translateX(-50%);
+    background: currentColor;
+}
+
+.icona-salva::after {
+    top: -8px;
+    width: 8px;
+    height: 8px;
+    transform: translateX(-50%) rotate(45deg);
+    border-right: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+}
+
+.dettaglio-occhiale .comando-prova[hidden] {
+    display: none;
+}
+
+.comando-prova-principale .comando-prova-cerchio {
+    background: #25334a;
+    color: #fff;
+}
+
+.comando-prova-principale:not(:disabled):hover .comando-prova-cerchio {
+    background: #384e70;
+}
+
+.icona-prova-3d {
+    padding: 2px 3px;
+    border: 1.5px solid currentColor;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+.icona-libreria {
+    width: 20px;
+    height: 20px;
+    background:
+        linear-gradient(currentColor, currentColor) top left / 8px 8px no-repeat,
+        linear-gradient(currentColor, currentColor) top right / 8px 8px no-repeat,
+        linear-gradient(currentColor, currentColor) bottom left / 8px 8px no-repeat,
+        linear-gradient(currentColor, currentColor) bottom right / 8px 8px no-repeat;
+}
+
+.icona-modello {
+    position: relative;
+    width: 26px;
+    height: 11px;
+    background: linear-gradient(currentColor, currentColor) center 3px / 6px 2px no-repeat;
+}
+
+.icona-modello::before,
+.icona-modello::after {
+    position: absolute;
+    top: 0;
+    width: 11px;
+    height: 11px;
+    border: 1.5px solid currentColor;
+    border-radius: 4px 4px 5px 5px;
+    content: "";
+}
+
+.icona-modello::before {
+    left: 0;
+}
+
+.icona-modello::after {
+    right: 0;
+}
+
+.icona-condividi {
+    position: relative;
+    width: 20px;
+    height: 20px;
+    background:
+        radial-gradient(circle, currentColor 0 2.5px, transparent 3px) left center / 6px 6px no-repeat,
+        radial-gradient(circle, currentColor 0 2.5px, transparent 3px) right top / 6px 6px no-repeat,
+        radial-gradient(circle, currentColor 0 2.5px, transparent 3px) right bottom / 6px 6px no-repeat;
+}
+
+.icona-condividi::before,
+.icona-condividi::after {
+    position: absolute;
+    top: 9px;
+    left: 5px;
+    width: 12px;
+    height: 1.5px;
+    transform-origin: left center;
+    background: currentColor;
+    content: "";
+}
+
+.icona-condividi::before {
+    transform: rotate(-32deg);
+}
+
+.icona-condividi::after {
+    transform: rotate(32deg);
+}
